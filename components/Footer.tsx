@@ -98,7 +98,7 @@ export default function Footer() {
                     target="_blank" 
                     className="opacity-65 flex items-center gap-2 mx-4 relative group transition-opacity hover:opacity-100"
                 >
-                    <span className="flex items-center font-semibold gap-2 transition-transform duration-500 ease-in-out group-hover:-translate-x-2">
+                    <span className="flex items-center font-semibold gap-2 dark:text-white text-black transition-transform duration-500 ease-in-out group-hover:-translate-x-2">
                         <FaGithub />
                         <div className="text-black dark:text-white tracking-wide whitespace-nowrap">Star me on GitHub</div>
                     </span>

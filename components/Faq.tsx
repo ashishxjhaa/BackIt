@@ -50,7 +50,7 @@ export default function Faq() {
             </p>
         </div>
 
-        <div className="mx-5 sm:mx-auto max-w-3xl rounded-lg border p-4 dark:bg-neutral-700 bg-amber-50">
+        <div className="mx-5 sm:mx-auto max-w-3xl rounded-lg border p-4 dark:bg-neutral-700 bg-amber-50 dark:text-white text-black">
             <Accordion type="single" collapsible className="w-full flex flex-col gap-2">
                 {faqs.map((faq) => (
                     <AccordionItem key={faq.value} value={faq.value}>

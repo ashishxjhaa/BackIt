@@ -6,11 +6,11 @@ export default function Stats() {
 
     return (
         <>
-        <div className="bg-white/80 dark:bg-neutral-700/40 py-20 mx-3 sm:mx-10 rounded-2xl">
+        <div className="bg-white/80 dark:bg-neutral-700/40 dark:text-white text-black py-20 mx-3 sm:mx-10 rounded-2xl">
             <div className="container px-4 md:px-6 mx-auto">
                 <div className="mb-12 text-center">
-                    <h2 className="dark:text-white text-black opacity-90 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Trusted by Innovators Worldwide</h2>
-                    <p className="mx-auto mt-4 max-w-[700px] md:text-xl dark:text-white text-black opacity-75 tracking-wide">Join thousands of creators who are launching their ideas and getting funded together.</p>
+                    <h2 className="opacity-90 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Trusted by Innovators Worldwide</h2>
+                    <p className="mx-auto mt-4 max-w-[700px] md:text-xl opacity-75 tracking-wide">Join thousands of creators who are launching their ideas and getting funded together.</p>
                 </div>
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                     <div className="rounded-xl border bg-slate-50 dark:bg-neutral-700 shadow-lg">
@@ -61,7 +61,7 @@ export default function Stats() {
         </div>
         
         <div className="py-20">
-            <div className="container px-4 md:px-10 mx-auto">
+            <div className="container px-4 md:px-10 mx-auto dark:text-white text-black">
                 <div className="mb-12 text-center">
                     <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl opacity-90">How to Use BackIt</h2>
                     <p className="mx-auto mt-4 max-w-[700px] opacity-65 md:text-xl tracking-wide">Get started in minutes with our simple launch process.</p>

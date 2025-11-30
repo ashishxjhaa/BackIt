@@ -39,7 +39,7 @@ export default function Navbar() {
                 </div>
                 <div className="flex items-center gap-3">
                     <Button variant='outline' asChild>
-                        <Link href="/signin" className="font-light! cursor-default">Log in</Link>
+                        <Link href="/signin" className="font-light! cursor-default bg-white text-black dark:text-white">Log in</Link>
                     </Button>
                     <Button variant='default' asChild>
                         <Link href="/signup" className="cursor-default">Register</Link>

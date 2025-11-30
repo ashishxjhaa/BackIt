@@ -34,7 +34,7 @@ export default function HeroSection() {
                 <Button variant='default' asChild>
                     <Link href="/product" className="cursor-default px-8!">List your project <IoArrowForward /> </Link>
                 </Button>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 text-black dark:text-white">
                     <AnimatedTooltipPreview />
                     <div>Trusted by 100+ devs</div>
                 </div>
