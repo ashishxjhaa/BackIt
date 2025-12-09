@@ -100,7 +100,7 @@ export default function Footer() {
                 >
                     <span className="flex items-center font-semibold gap-2 dark:text-white text-black transition-transform duration-500 ease-in-out group-hover:-translate-x-2">
                         <FaGithub />
-                        <div className="text-black dark:text-white tracking-wide whitespace-nowrap">Star me on GitHub</div>
+                        <div className="text-black dark:text-white tracking-wide whitespace-nowrap">Star on GitHub</div>
                     </span>
                     <IconArrowUpRight size={48} strokeWidth={1.25} className="absolute h-[22px] -right-8 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100 text-black dark:text-white" />
                 </Link> 
