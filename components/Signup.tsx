@@ -10,7 +10,7 @@ export default function SignUp() {
         <div className="bg-[#F6F6EF] dark:bg-neutral-800 min-h-screen w-full overflow-x-hidden">
 
             <div className="flex items-center justify-center">
-                <div className="flex flex-col items-center justify-center w-full max-w-md pt-10 sm:pt-12 gap-5 mb-10">
+                <div className="flex flex-col items-center justify-center px-8 sm:px-0 w-full max-w-md pt-10 sm:pt-12 gap-5 mb-10">
                     <Image src="/home.png" alt="BackIt" width={56} height={56} />
 
                     <div className="border border-neutral-300 dark:border-neutral-500 rounded-lg text-black dark:text-white w-full">
