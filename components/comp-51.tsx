@@ -6,9 +6,14 @@ import { useId, useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export default function Component() {
+export default function Component({
+  value,
+  onChange
+}: {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}) {
   const id = useId();
-  const [password, setPassword] = useState("");
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const toggleVisibility = () => setIsVisible((prevState) => !prevState);
@@ -27,7 +32,7 @@ export default function Component() {
     }));
   };
 
-  const strength = checkStrength(password);
+  const strength = checkStrength(value);
 
   const strengthScore = useMemo(() => {
     return strength.filter((req) => req.met).length;
@@ -58,10 +63,10 @@ export default function Component() {
             aria-describedby={`${id}-description`}
             className="pe-9"
             id={id}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={onChange}
             placeholder="Password"
             type={isVisible ? "text" : "password"}
-            value={password}
+            value={value}
           />
           <button
             aria-controls="password"

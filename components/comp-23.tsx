@@ -5,7 +5,13 @@ import { useId, useState } from "react";
 
 import { Input } from "@/components/ui/input";
 
-export default function Component() {
+export default function Component({
+  value,
+  onChange
+}: {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}) {
   const id = useId();
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
@@ -19,6 +25,8 @@ export default function Component() {
           id={id}
           placeholder="Password"
           type={isVisible ? "text" : "password"}
+          onChange={onChange}
+          value={value}
         />
         <button
           aria-controls="password"

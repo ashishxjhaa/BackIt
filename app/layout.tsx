@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/lib/theme-provider";
 import { Noto_Sans_JP } from "next/font/google";
+import { Toaster } from "sonner";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Toaster position="bottom-right" />
         </ThemeProvider>
       </body>
     </html>
