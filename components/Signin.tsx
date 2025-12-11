@@ -32,19 +32,11 @@ export default function SignIn() {
 
     setLoading(true);
     try {
-      await toast.promise(
-        axios.post("/api/signin", formData, { withCredentials: true, }),
-        {
-          loading: "Signing in...",
-          success: () => {
-            router.push('/listings');
-            return "Signin successful  🎉";
-          },
-          error: "Signin failed!",
-        }
-      );
+      await axios.post("/api/signin", formData, { withCredentials: true, });
+      toast.success("Signin successful 🎉");
+      router.push('/listings');
     } catch (err) {
-      console.log(err)
+      toast.error((err as { response?: { data?: { error?: string } } })?.response?.data?.error || "Signin failed");
     } finally {
       setLoading(false);
     }
@@ -71,7 +63,7 @@ export default function SignIn() {
               <div className="flex flex-col gap-1.5">Email <Input type='email' value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="example@email.com" /></div>
               <div className="flex flex-col gap-1.5">Password <Component value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} /></div>
                             
-              <Button type='submit' disabled={loading} className="w-full disabled:opacity-65">{loading ? <Spinner className="w-4 h-4" /> : 'LOGIN'}</Button>
+              <Button type='submit' disabled={loading} className="w-full">{loading ? <Spinner className="w-4 h-4" /> : 'LOGIN'}</Button>
             </form>
           </div>
         </div>

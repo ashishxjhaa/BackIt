@@ -39,21 +39,13 @@ export default function SignUp() {
 
         setLoading(true);
         try {
-            await toast.promise(
-                axios.post("/api/signup", formData, { withCredentials: true, }),
-                {
-                    loading: "Creating account...",
-                    success: (res) => {
-                        if (res.status === 200) {
-                            router.push("/listings");
-                        }
-                        return "Signup successful 🎉";
-                    },
-                    error: "Signup failed"
-                }
-            );
+            const response = await axios.post("/api/signup", formData, { withCredentials: true, });
+            toast.success("Signup successful 🎉");
+            if (response.status === 200) {
+                router.push("/listings");
+            }
         } catch (err) {
-            console.log(err)
+            toast.error((err as { response?: { data?: { error?: string } } })?.response?.data?.error || "Signup failed");
         } finally {
             setLoading(false);
         }
@@ -81,7 +73,7 @@ export default function SignUp() {
                             <div className="flex flex-col gap-1.5">Email <Input type='email' value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="example@email.com" /></div>
                             <div className="flex flex-col gap-1.5">Password <Component value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} /></div>
                             
-                            <Button type='submit' disabled={loading} className="w-full disabled:opacity-65">{loading ? <Spinner className="w-4 h-4" /> : 'SIGN UP'}</Button>
+                            <Button type='submit' disabled={loading} className="w-full">{loading ? <Spinner className="w-4 h-4" /> : 'SIGN UP'}</Button>
                         </form>
                     </div>
                 </div>
