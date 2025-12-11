@@ -42,7 +42,7 @@ export default function SignUp() {
             const response = await axios.post("/api/signup", formData, { withCredentials: true, });
             toast.success("Signup successful 🎉");
             if (response.status === 200) {
-                router.push("/listings");
+                router.push("/signin");
             }
         } catch (err) {
             toast.error((err as { response?: { data?: { error?: string } } })?.response?.data?.error || "Signup failed");

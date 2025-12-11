@@ -33,7 +33,7 @@ export default function SignIn() {
     setLoading(true);
     try {
       await axios.post("/api/signin", formData, { withCredentials: true, });
-      toast.success("Signin successful 🎉");
+      toast.success("Welcome to Back It 🎉");
       router.push('/listings');
     } catch (err) {
       toast.error((err as { response?: { data?: { error?: string } } })?.response?.data?.error || "Signin failed");
