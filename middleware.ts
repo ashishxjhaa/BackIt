@@ -24,5 +24,6 @@ export const config = {
     matcher: [
         '/listings/:path*',
         '/profile/:path*',
+        '/saved/:path*',
     ],
 };

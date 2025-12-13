@@ -24,7 +24,7 @@ export default function Navbar() {
                     </div>
                 </Link>
                 <div className="hidden md:flex items-center gap-8 text-black dark:text-white font-light cursor-default">
-                    <Link href='/' className="flex items-center gap-2 opacity-80 hover:opacity-100 cursor-pointer">
+                    <Link href='/listings' className="flex items-center gap-2 opacity-80 hover:opacity-100 cursor-pointer">
                         <GoHome size={20} />
                         <span>Home</span>
                     </Link>
@@ -32,7 +32,7 @@ export default function Navbar() {
                         <Megaphone size={19} className="rotate-y-180" />
                         <span>Pricing</span>
                     </Link>
-                    <Link href='/myproduct' className="flex items-center gap-2 opacity-80 hover:opacity-100 cursor-pointer">
+                    <Link href='/profile' className="flex items-center gap-2 opacity-80 hover:opacity-100 cursor-pointer">
                         <LuCircleFadingPlus size={19} />
                         <span>Add your product</span>
                     </Link>
