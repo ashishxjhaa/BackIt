@@ -12,8 +12,16 @@ export async function middleware(req: NextRequest) {
 
     try {
         const secret = new TextEncoder().encode(secretEnv)
-        await jose.jwtVerify(token, secret)
-        return NextResponse.next()
+        const { payload } = await jose.jwtVerify(token, secret)
+        
+        const requestHeaders = new Headers(req.headers)
+        requestHeaders.set('x-user-id', payload.userId as string)
+        
+        return NextResponse.next({
+            request: {
+                headers: requestHeaders,
+            }
+        })
     } catch {
         return NextResponse.redirect(new URL("/signin", req.url))
     }
@@ -25,5 +33,6 @@ export const config = {
         '/listings/:path*',
         '/profile/:path*',
         '/saved/:path*',
+        '/api/me/:path*',
     ],
 };
