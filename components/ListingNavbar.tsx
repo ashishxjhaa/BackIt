@@ -58,7 +58,7 @@ const ListingNavbar = () => {
   return (
     <div className="fixed w-full z-50 p-4 bg-[#F6F6EF]/70 dark:bg-neutral-800/40 backdrop-blur-md border-b border-gray-600">
       <div className="flex items-center justify-between max-w-5xl mx-auto">
-        <Image src='/BackIt.svg' alt="project-funding" width={45} height={45} className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
+        <Image src='/BackIt.svg' alt="project-funding" width={45} height={45} className="w-8 h-8 object-contain" />
 
         <div className="relative">
           <input 
@@ -74,7 +74,7 @@ const ListingNavbar = () => {
         <div className="relative" ref={profileRef}>
           <div 
             onClick={() => setOpenProfile(true)} 
-            className="flex items-center gap-1 border-[1] border-black/40 dark:border-white/50 rounded-t-md pl-1.5 pr-0.5 py-0.5 text-black dark:text-white"
+            className="flex items-center gap-0.5 text-black dark:text-white"
           >
             <AvatarDemo />
             <ChevronDown size={20} />
