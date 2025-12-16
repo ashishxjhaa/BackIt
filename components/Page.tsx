@@ -1,10 +1,10 @@
 'use client'
 
-import { ArrowBigUp, Bookmark, Heart, Layers, Plus, User } from "lucide-react"
+import { ArrowBigUp, Bookmark, Heart, Layers, User } from "lucide-react"
 import Back from "./Back"
-import { Button } from "./ui/button"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import UploadProject from "./UploadProject"
 
 
 const Page = () => {
@@ -46,7 +46,7 @@ const Page = () => {
                     </span>
                 </div>
             </div>
-            <Button><Plus />Upload project</Button>
+            <UploadProject />
         </div>
 
 
