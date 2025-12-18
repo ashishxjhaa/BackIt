@@ -83,7 +83,7 @@ const ListingNavbar = () => {
           {openProfile && (
             <div className="absolute top-full right-0 mt-2 w-fit z-50">
               {/* First Part */}
-              <div className="bg-[#D69B6F] flex flex-col gap-3 p-4 rounded-t-lg border border-b-0 border-black dark:border-white/35">
+              <div className="bg-[#fab885] flex flex-col gap-3 p-4 rounded-t-lg border border-b-0 border-black dark:border-white/35">
                 <div className="flex items-center gap-3">
                   <div className="relative rounded-full size-12">
                     <div className="absolute flex h-full w-full items-center justify-center rounded-full bg-gray-600 text-white text-2xl font-serif">
@@ -101,7 +101,7 @@ const ListingNavbar = () => {
               </div>
 
               {/* Second Part */}
-              <div className="bg-sky-100 dark:bg-neutral-600 text-black dark:text-white p-2 space-y-1 w-full rounded-b-lg border border-t-0 border-black dark:border-white/35">
+              <div className="bg-gray-200 dark:bg-neutral-700 text-black dark:text-white p-2 space-y-1 w-full rounded-b-lg border border-t-0 border-black dark:border-white/35">
                 <div onClick={() => router.push("/profile")} className="flex items-center gap-2 cursor-pointer px-3 py-2 rounded-md hover:bg-accent dark:hover:bg-accent/50 text-sm">
                   <User size={17} />
                   <span className="tracking-wide">Profile</span>

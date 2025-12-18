@@ -22,7 +22,7 @@ function UploadProject() {
 
         {open && (
             <div className="fixed inset-0 z-50 flex items-center justify-center min-h-screen">
-                <div className="relative bg-neutral-300 dark:bg-neutral-800 text-black dark:text-white rounded-xl p-6 w-[90%] max-w-md max-h-[80vh] overflow-y-auto">
+                <div className="relative bg-neutral-300 dark:bg-neutral-800 text-black dark:text-white border rounded-xl p-6 w-[90%] max-w-md max-h-[80vh] overflow-y-auto">
                     <div className="flex items-center justify-between mb-5">
                         <div className="font-medium text-lg">PROJECT DETAILS</div>
                             <div 
@@ -35,13 +35,13 @@ function UploadProject() {
 
                         <div className="flex flex-col gap-4">
                             <div className="bg-gray-200 dark:bg-[#43383E] rounded-md p-2 px-3">
-                                <label className="text-sm font-medium">Project name</label>
+                                <div className="text-sm font-medium pb-2">Project name</div>
                                 <Input type='text' placeholder='BackIt, Inc' />
                             </div>
 
                             <div className="bg-gray-200 dark:bg-[#43383E] rounded-md p-2 px-3">
                                 <div className="flex items-center justify-between">
-                                    <label className="text-sm font-medium">Short description</label>
+                                    <div className="text-sm font-medium pb-2">Short description</div>
                                     <span className="text-xs opacity-55">
                                         {0}/{maxLength}
                                     </span>
@@ -50,18 +50,18 @@ function UploadProject() {
                             </div>
 
                             <div className="bg-gray-200 dark:bg-[#43383E] rounded-md p-2 px-3">
-                                <label className="text-sm font-medium">Live link</label>
+                                <div className="text-sm font-medium pb-2">Live link</div>
                                 <Input type='url' placeholder='https://example.com' />
                             </div>
 
                             <div className="bg-gray-200 dark:bg-[#43383E] rounded-md p-2 px-3">
-                                <label className="text-sm font-medium">Upload logo</label>
+                                <div className="text-sm font-medium pb-2">Upload logo</div>
                                 <Input type='url' placeholder='https://example.com' />
                             </div>
 
                             <div className="bg-gray-200 dark:bg-[#43383E] rounded-md p-2 px-3">
                                 <div className="flex items-center justify-between">
-                                    <label className="text-sm font-medium">Tags</label>
+                                    <div className="text-sm font-medium">Tags</div>
                                 </div>
                                 <div className="flex flex-wrap gap-2 mt-2">
                                     {tags.map((tag) => {
