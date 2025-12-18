@@ -6,13 +6,30 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import UploadProject from "./UploadProject"
 
+interface Project {
+    id: string;
+    name: string;
+    description: string;
+    link: string;
+    tags: string[];
+    upvotes: number;
+    hearts: number;
+    saves: number;
+    createdAt: Date;
+}
 
 const Page = () => {
 
     const [user, setUser] = useState({ fullName: '', createdAt: '' })
+    const [stats, setStats] = useState({ projects: 0, upvotes: 0, hearts: 0, saves: 0 })
+    const [projects, setProjects] = useState<Project[]>([])
 
     useEffect(() => {
         axios.get('/api/me').then(res => setUser(res.data.user))
+        axios.get('/api/uploadproject').then(res => {
+            setStats(res.data.stats)
+            setProjects(res.data.projects)
+        })
     }, [])
 
     const initials = user.fullName.split(' ').map(n => n[0]).join('').toUpperCase()
@@ -57,7 +74,7 @@ const Page = () => {
                         <Layers size={16} />
                         <span className="text-sm tracking-wider">Projects</span>
                     </div>
-                    <p className="text-2xl">9</p>
+                    <p className="text-2xl">{stats.projects}</p>
                     <p className="text-xs mt-2 tracking-wide text-[#FF8162]">Time to build more! ⏰</p>
                 </div>
             </div>
@@ -67,8 +84,8 @@ const Page = () => {
                         <ArrowBigUp size={16} />
                         <span className="text-sm tracking-wider">Upvotes</span>
                     </div>
-                    <p className="text-2xl">6 vote</p>
-                    <p className="text-xs mt-2 tracking-wide text-[#FF8162]">Dedication level: Normal ☀️</p>
+                    <p className="text-2xl">{stats.upvotes} vote</p>
+                    <p className="text-xs mt-2 tracking-wide text-[#FF8162]">Dedication level: Good ☀️</p>
                 </div>
             </div>
             <div className="rounded-xl border bg-gray-200 dark:bg-[#3A2F35] text-card-foreground overflow-hidden border-none">
@@ -77,7 +94,7 @@ const Page = () => {
                         <Heart size={16} />
                         <span className="text-sm tracking-wider">Hearts</span>
                     </div>
-                    <p className="text-2xl">7</p>
+                    <p className="text-2xl">{stats.hearts}</p>
                     <p className="text-xs mt-2 tracking-wide text-[#FF8162]">Time to learn more! 📚</p>
                 </div>
             </div>
@@ -87,9 +104,21 @@ const Page = () => {
                         <Bookmark size={16} />
                         <span className="text-sm tracking-wider">Saved</span>
                     </div>
-                    <p className="text-2xl">10</p>
+                    <p className="text-2xl">{stats.saves}</p>
                     <p className="text-xs mt-2 tracking-wide text-[#FF8162]">Start listing more project 🎯</p>
                 </div>
+            </div>
+        </div>
+
+        <div className="px-10 pb-10">
+            <h2 className="text-xl font-medium mb-4">My Projects</h2>
+            <div className="grid gap-4">
+                {projects.map((p: Project) => (
+                    <div key={p.id} className="bg-gray-200 dark:bg-[#3A2F35] p-4 rounded-lg">
+                        <h3 className="font-medium">{p.name}</h3>
+                        <p className="text-sm opacity-70">{p.description}</p>
+                    </div>
+                ))}
             </div>
         </div>
 
