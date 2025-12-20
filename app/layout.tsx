@@ -3,7 +3,6 @@ import "./globals.css";
 import { ThemeProvider } from "@/lib/theme-provider";
 import { Noto_Sans_JP } from "next/font/google";
 import { Toaster } from "sonner";
-import { Providers } from "./providers";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
@@ -33,10 +32,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Providers>
-            {children}
-            <Toaster position="bottom-right" />
-          </Providers>
+          {children}
+          <Toaster position="bottom-right" />
         </ThemeProvider>
       </body>
     </html>

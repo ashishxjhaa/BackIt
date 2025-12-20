@@ -34,5 +34,6 @@ export const config = {
         '/profile/:path*',
         '/saved/:path*',
         '/api/me/:path*',
+        '/api/uploadproject/:path*',
     ],
 };
