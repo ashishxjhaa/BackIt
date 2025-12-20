@@ -9,7 +9,7 @@ function Back() {
   const router = useRouter();
 
   return (
-    <div className="flex justify-between items-center px-8 pt-8">
+    <div className="flex justify-between items-center px-8 pt-8 cursor-default">
       <div className='w-fit'>
         <div 
           className='flex rounded-3xl text-black dark:text-white bg-neutral-200 hover:bg-neutral-300 dark:bg-zinc-600 dark:hover:bg-zinc-700 px-3 pt-1 pb-1.5' 

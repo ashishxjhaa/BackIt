@@ -5,11 +5,15 @@ export async function POST(req: NextRequest) {
     try {
         const { name, description, link, tags, userId } = await req.json();
 
+        const domain = new URL(link).hostname
+        const logoUrl = `https://logo.clearbit.com/${domain}`
+
         const project = await prisma.project.create({
             data: {
                 name,
                 description,
                 link,
+                logoUrl,
                 tags,
                 userId,
             },
