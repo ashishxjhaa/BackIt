@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import UploadProject from "./UploadProject"
 import Image from "next/image"
+import { toast } from "sonner"
 
 interface Project {
     id: string
@@ -17,6 +18,9 @@ interface Project {
     upvotes: number
     hearts: number
     saves: number
+    hasUpvoted: boolean
+    hasHearted: boolean
+    hasSaved: boolean
     createdAt: Date
 }
 
@@ -33,6 +37,46 @@ const Page = () => {
             setProjects(res.data.projects)
         })
     }, [])
+
+    const handleUpvote = async (projectId: string) => {
+        try {
+            const res = await axios.post(`/api/projects/${projectId}/upvote`)
+            setProjects(projects.map(p => 
+                p.id === projectId 
+                    ? { ...p, hasUpvoted: res.data.upvoted, upvotes: p.upvotes + (res.data.upvoted ? 1 : -1) }
+                    : p
+            ))
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleHeart = async (projectId: string) => {
+        try {
+            const res = await axios.post(`/api/projects/${projectId}/heart`)
+            setProjects(projects.map(p => 
+                p.id === projectId 
+                    ? { ...p, hasHearted: res.data.hearted, hearts: p.hearts + (res.data.hearted ? 1 : -1) }
+                    : p
+            ))
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleSave = async (projectId: string) => {
+        try {
+            const res = await axios.post(`/api/projects/${projectId}/save`)
+            setProjects(projects.map(p => 
+                p.id === projectId 
+                    ? { ...p, hasSaved: res.data.saved, saves: p.saves + (res.data.saved ? 1 : -1) }
+                    : p
+            ))
+            toast.success(res.data.saved ? 'Project saved!' : 'Project unsaved')
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const initials = user.fullName.split(' ').map(n => n[0]).join('').toUpperCase()
     const formattedDate = new Date(user.createdAt).toLocaleDateString('en-US', {
@@ -154,15 +198,24 @@ const Page = () => {
                                 </div>
                             </div>
                             <div className="flex gap-3 items-center">
-                                <div className='flex items-center justify-center w-12 h-12 rounded-xl border border-gray-400 dark:border-gray-50/30 hover:border-[#FF8162] dark:hover:border-[#FF8162] cursor-pointer'>
+                                <div 
+                                    onClick={() => handleUpvote(p.id)} 
+                                    className={`flex items-center justify-center w-12 h-12 rounded-xl border border-gray-400 dark:border-gray-50/30 hover:border-[#FF8162] dark:hover:border-[#FF8162] cursor-pointer ${p.hasUpvoted ? 'text-[#FF8162]' : ''}`}
+                                >
                                     <ArrowBigUp />
                                 </div>     
                     
-                                <div className='flex items-center justify-center w-12 h-12 rounded-xl border border-gray-400 dark:border-gray-50/30 hover:border-[#FF8162] dark:hover:border-[#FF8162] cursor-pointer'>
+                                <div 
+                                    onClick={() => handleHeart(p.id)} 
+                                    className={`flex items-center justify-center w-12 h-12 rounded-xl border border-gray-400 dark:border-gray-50/30 hover:border-[#FF8162] dark:hover:border-[#FF8162] cursor-pointer ${p.hasUpvoted ? 'text-[#FF8162]' : ''}`}
+                                >
                                     <Heart />
                                 </div>
 
-                                <div className='flex items-center justify-center w-12 h-12 rounded-xl border border-gray-400 dark:border-gray-50/30 hover:border-[#FF8162] dark:hover:border-[#FF8162] cursor-pointer'>
+                                <div 
+                                    onClick={() => handleSave(p.id)} 
+                                    className={`flex items-center justify-center w-12 h-12 rounded-xl border border-gray-400 dark:border-gray-50/30 hover:border-[#FF8162] dark:hover:border-[#FF8162] cursor-pointer ${p.hasUpvoted ? 'text-[#FF8162]' : ''}`}
+                                >
                                     <Bookmark />  
                                 </div>
                             </div>
