@@ -112,10 +112,10 @@ const Page = () => {
             </div>
         </div>
 
-        <div className="m-4 mb-10 sm:m-12 mt-2">
-            <h2 className="text-3xl font-medium tracking-tight mx-auto max-w-3xl pb-3 text-[#FF8162]">My Projects</h2>
+        <div className="mb-10 mt-2">
+            <h2 className="text-3xl font-medium tracking-tight text-center sm:text-left sm:mx-14 pb-3 text-[#FF8162]">My Projects</h2>
             {projects.length > 0 ? (
-                <div className="bg-gray-300 dark:bg-neutral-700 rounded-md px-3 py-3.5 grid gap-3 max-w-3xl">
+                <div className="bg-gray-300 dark:bg-neutral-700 rounded-md px-3 py-3.5 grid gap-3 mx-4 sm:mx-12">
                     {projects.map((p: Project) => (
                         <div 
                             key={p.id} 
