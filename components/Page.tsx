@@ -114,24 +114,26 @@ const Page = () => {
 
         <div className="m-4 mb-10 sm:m-12 mt-2">
             <h2 className="text-3xl font-medium tracking-tight mx-auto max-w-3xl pb-3 text-[#FF8162]">My Projects</h2>
-            <div className="bg-gray-300 dark:bg-neutral-700 rounded-md p-3 grid gap-3 max-w-3xl">
-                {projects.map((p: Project) => (
-                    <div 
-                        key={p.id} 
-                        className="bg-gray-200 dark:bg-[#3A2F35] text-black dark:text-white p-4 rounded-lg"
-                    >
-                        <Image
-                            src={p.logoUrl} 
-                            alt={p.name}
-                            width={48}
-                            height={48}
-                            className="rounded-lg object-cover"
-                        />
-                        <h3 className="font-medium">{p.name}</h3>
-                        <p className="text-sm opacity-70">{p.description}</p>
-                    </div>
-                ))}
-            </div>
+            {projects.length > 0 ? (
+                <div className="bg-gray-300 dark:bg-neutral-700 rounded-md px-3 py-3.5 grid gap-3 max-w-3xl">
+                    {projects.map((p: Project) => (
+                        <div 
+                            key={p.id} 
+                            className="bg-gray-200 dark:bg-[#3A2F35] text-black dark:text-white p-4 rounded-lg"
+                        >
+                            <Image
+                                src={p.logoUrl} 
+                                alt={p.name}
+                                width={48}
+                                height={48}
+                                className="rounded-lg object-cover"
+                            />
+                            <h3 className="font-medium">{p.name}</h3>
+                            <p className="text-sm opacity-70">{p.description}</p>
+                        </div>
+                    ))}
+                </div>
+            ) : null}
         </div>
 
     </div>

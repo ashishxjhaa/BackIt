@@ -22,7 +22,7 @@ model Project {
   name        String
   description String
   link        String
-  logoUrl     String?
+  logoUrl     String
   tags        String[]
   upvotes     Int      @default(0)
   hearts      Int      @default(0)

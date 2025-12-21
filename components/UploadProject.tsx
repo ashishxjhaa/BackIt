@@ -18,13 +18,14 @@ function UploadProject() {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [link, setLink] = useState('')
+    const [logo, setLogo] = useState('')
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
-        if (!name || !description || !link || selectedTags.length === 0) {
-            toast.error('Please fill all fields and select at least one tag')
+        if (!name || !description || !link || !logo || selectedTags.length === 0) {
+            toast.error('Please fill all fields including logo')
             return
         }
 
@@ -36,6 +37,7 @@ function UploadProject() {
                 name,
                 description,
                 link,
+                logoUrl: logo,
                 tags: selectedTags,
                 userId
             })
@@ -46,6 +48,7 @@ function UploadProject() {
         setName('')
         setDescription('')
         setLink('')
+        setLogo('')
         setSelectedTags([])
     } catch (error) {
         console.log(error)
@@ -110,6 +113,22 @@ function UploadProject() {
                                     placeholder='https://example.com'
                                     value={link}
                                     onChange={(e) => setLink(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="bg-gray-200 dark:bg-[#43383E] rounded-md p-2 px-3">
+                                <div className="text-sm font-medium pb-2">Upload Logo</div>
+                                <Input 
+                                    type='file'
+                                    accept='image/*'
+                                    onChange={(e) => {
+                                        const file = e.target.files?.[0]
+                                        if (file) {
+                                            const reader = new FileReader()
+                                            reader.onloadend = () => setLogo(reader.result as string)
+                                            reader.readAsDataURL(file)
+                                        }
+                                    }}
                                 />
                             </div>
 

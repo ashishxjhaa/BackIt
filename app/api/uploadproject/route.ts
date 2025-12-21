@@ -3,10 +3,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
     try {
-        const { name, description, link, tags, userId } = await req.json();
-
-        const domain = new URL(link).hostname
-        const logoUrl = `https://logo.clearbit.com/${domain}`
+        const { name, description, link, logoUrl, tags, userId } = await req.json();
 
         const project = await prisma.project.create({
             data: {
