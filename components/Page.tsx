@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowBigUp, Bookmark, Heart, Layers, User } from "lucide-react"
+import { ArrowBigUp, Bookmark, Heart, Layers, User, SquareArrowOutUpRight, Tags } from "lucide-react"
 import Back from "./Back"
 import { useEffect, useState } from "react"
 import axios from "axios"
@@ -45,7 +45,7 @@ const Page = () => {
     <div>
         <Back />
 
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-10 p-10">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-10 p-10">
             <div className="relative">
                 <div className="absolute -inset-1 bg-linear-to-r from-primary to-accent rounded-full opacity-75 blur-sm"></div>
                 <div className="relative flex shrink-0 rounded-full h-24 w-24">
@@ -69,7 +69,7 @@ const Page = () => {
         </div>
 
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 py-4 px-4 sm:px-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:py-4 px-4 sm:px-10">
             <div className="rounded-xl border bg-gray-200 dark:bg-[#3A2F35] text-card-foreground overflow-hidden border-none">
                 <div className="p-6 pt-7 pb-9 text-black dark:text-white">
                     <div className="flex items-center gap-2 mb-2">
@@ -112,24 +112,60 @@ const Page = () => {
             </div>
         </div>
 
-        <div className="mb-10 mt-2">
+        <div className="py-15">
             <h2 className="text-3xl font-medium tracking-tight text-center sm:text-left sm:mx-14 pb-3 text-[#FF8162]">My Projects</h2>
             {projects.length > 0 ? (
                 <div className="bg-gray-300 dark:bg-neutral-700 rounded-md px-3 py-3.5 grid gap-3 mx-4 sm:mx-12">
                     {projects.map((p: Project) => (
                         <div 
                             key={p.id} 
-                            className="bg-gray-200 dark:bg-[#3A2F35] text-black dark:text-white p-4 rounded-lg"
+                            className="bg-gray-200 dark:bg-[#3A2F35] text-black dark:text-white p-4 rounded-lg flex flex-col sm:flex-row gap-3 group"
                         >
-                            <Image
-                                src={p.logoUrl} 
-                                alt={p.name}
-                                width={48}
-                                height={48}
-                                className="rounded-lg object-cover"
-                            />
-                            <h3 className="font-medium">{p.name}</h3>
-                            <p className="text-sm opacity-70">{p.description}</p>
+                            <div className="flex gap-3 flex-1">
+                                <div className="w-12 h-12 shrink-0">
+                                    <Image
+                                        src={p.logoUrl} 
+                                        alt={p.name}
+                                        width={48}
+                                        height={48}
+                                        className="rounded-lg object-cover"
+                                    />
+                                </div>
+                                <div className="flex-1">
+                                    <a
+                                        href={p.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="font-medium flex items-center gap-1 group-hover:text-[#FF8162] transition"
+                                    >
+                                        {p.name}
+                                        <SquareArrowOutUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition" />
+                                    </a>
+                                    <p className="text-sm opacity-70">{p.description}</p>
+    
+                                    <div className="flex items-center gap-2 mt-2">
+                                        <Tags className="w-4 h-4" />
+                                        {p.tags.map((tag, i) => (
+                                            <span key={i} className="text-xs px-2 py-1 rounded-full bg-gray-300 dark:bg-neutral-600">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex gap-3 items-center">
+                                <div className='flex items-center justify-center w-12 h-12 rounded-xl border border-gray-400 dark:border-gray-50/30 hover:border-[#FF8162] dark:hover:border-[#FF8162] cursor-pointer'>
+                                    <ArrowBigUp />
+                                </div>     
+                    
+                                <div className='flex items-center justify-center w-12 h-12 rounded-xl border border-gray-400 dark:border-gray-50/30 hover:border-[#FF8162] dark:hover:border-[#FF8162] cursor-pointer'>
+                                    <Heart />
+                                </div>
+
+                                <div className='flex items-center justify-center w-12 h-12 rounded-xl border border-gray-400 dark:border-gray-50/30 hover:border-[#FF8162] dark:hover:border-[#FF8162] cursor-pointer'>
+                                    <Bookmark />  
+                                </div>
+                            </div>
                         </div>
                     ))}
                 </div>
