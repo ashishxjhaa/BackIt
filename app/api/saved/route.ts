@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
             }
         });
 
-        const projectsWithFlags = user?.savedProjects.map(p => ({
+        const projectsWithFlags = user?.savedProjects.map((p: typeof user.savedProjects[0]) => ({
             ...p,
             hasUpvoted: p.upvotedBy.length > 0,
             hasHearted: p.heartedBy.length > 0,

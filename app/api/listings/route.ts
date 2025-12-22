@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
             orderBy: { createdAt: 'desc' }
         });
 
-        const projectsWithFlags = projects.map(p => ({
+        const projectsWithFlags = projects.map((p: typeof projects[0]) => ({
             ...p,
             hasUpvoted: p.upvotedBy?.length > 0,
             hasHearted: p.heartedBy?.length > 0,

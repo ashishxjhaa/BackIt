@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
             orderBy: { createdAt: 'desc' }
         });
 
-        const projectsWithFlags = projects.map(p => ({
+        const projectsWithFlags = projects.map((p: typeof projects[0]) => ({
             ...p,
             hasUpvoted: p.upvotedBy.length > 0,
             hasHearted: p.heartedBy.length > 0,
@@ -46,9 +46,9 @@ export async function GET(req: NextRequest) {
 
         const stats = {
             projects: projects.length,
-            upvotes: projects.reduce((sum, p) => sum + p.upvotes, 0),
-            hearts: projects.reduce((sum, p) => sum + p.hearts, 0),
-            saves: projects.reduce((sum, p) => sum + p.saves, 0)
+            upvotes: projects.reduce((sum: number, p: typeof projects[0]) => sum + p.upvotes, 0),
+            hearts: projects.reduce((sum: number, p: typeof projects[0]) => sum + p.hearts, 0),
+            saves: projects.reduce((sum: number, p: typeof projects[0]) => sum + p.saves, 0)
         };
 
         return NextResponse.json({ projects: projectsWithFlags, stats });
