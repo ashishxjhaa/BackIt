@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "bun run --bun next dev",
-    "build": "bun run --bun next build",
+    "build": "prisma generate && bun run --bun next build",
     "start": "bun run --bun next start",
     "lint": "eslint"
   },
