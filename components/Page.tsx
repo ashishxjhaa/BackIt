@@ -7,6 +7,8 @@ import axios from "axios"
 import UploadProject from "./UploadProject"
 import Image from "next/image"
 import { toast } from "sonner"
+import { useProjectStore } from "@/lib/store"
+import { ProjectCardSkeleton } from "./ProjectCardSkeleton"
 
 interface Project {
     id: string
@@ -26,54 +28,89 @@ interface Project {
 
 const Page = () => {
 
+    const { setProjects: setGlobalProjects, updateProject } = useProjectStore()
+
     const [user, setUser] = useState({ fullName: '', createdAt: '' })
     const [stats, setStats] = useState({ projects: 0, upvotes: 0, hearts: 0, saves: 0 })
     const [projects, setProjects] = useState<Project[]>([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         axios.get('/api/me').then(res => setUser(res.data.user))
         axios.get('/api/uploadproject').then(res => {
             setStats(res.data.stats)
             setProjects(res.data.projects)
+            setGlobalProjects(res.data.projects)
+            setLoading(false)
         })
     }, [])
 
     const handleUpvote = async (projectId: string) => {
+        const project = projects.find(p => p.id === projectId)!
+        const optimisticUpdate = {
+            hasUpvoted: !project.hasUpvoted,
+            upvotes: project.upvotes + (project.hasUpvoted ? -1 : 1)
+        }
+    
+        setProjects(projects.map(p => 
+            p.id === projectId ? { ...p, ...optimisticUpdate } : p
+        ))
+        updateProject(projectId, optimisticUpdate)
+
         try {
-            const res = await axios.post(`/api/projects/${projectId}/upvote`)
-            setProjects(projects.map(p => 
-                p.id === projectId 
-                    ? { ...p, hasUpvoted: res.data.upvoted, upvotes: p.upvotes + (res.data.upvoted ? 1 : -1) }
-                    : p
-            ))
+            await axios.post(`/api/projects/${projectId}/upvote`)
         } catch (error) {
+            setProjects(projects.map(p => 
+                p.id === projectId ? project : p
+            ))
+            updateProject(projectId, { hasUpvoted: project.hasUpvoted, upvotes: project.upvotes })
             console.log(error)
         }
     }
 
     const handleHeart = async (projectId: string) => {
+        const project = projects.find(p => p.id === projectId)!
+        const optimisticUpdate = {
+            hasHearted: !project.hasHearted,
+            hearts: project.hearts + (project.hasHearted ? -1 : 1)
+        }
+    
+        setProjects(projects.map(p => 
+            p.id === projectId ? { ...p, ...optimisticUpdate } : p
+        ))
+        updateProject(projectId, optimisticUpdate)
+
         try {
-            const res = await axios.post(`/api/projects/${projectId}/heart`)
-            setProjects(projects.map(p => 
-                p.id === projectId 
-                    ? { ...p, hasHearted: res.data.hearted, hearts: p.hearts + (res.data.hearted ? 1 : -1) }
-                    : p
-            ))
+            await axios.post(`/api/projects/${projectId}/heart`)
         } catch (error) {
+            setProjects(projects.map(p => 
+                p.id === projectId ? project : p
+            ))
+            updateProject(projectId, { hasHearted: project.hasHearted, hearts: project.hearts })
             console.log(error)
         }
     }
 
     const handleSave = async (projectId: string) => {
+        const project = projects.find(p => p.id === projectId)!
+        const optimisticUpdate = {
+            hasSaved: !project.hasSaved,
+            saves: project.saves + (project.hasSaved ? -1 : 1)
+        }
+    
+        setProjects(projects.map(p => 
+            p.id === projectId ? { ...p, ...optimisticUpdate } : p
+        ))
+        updateProject(projectId, optimisticUpdate)
+        toast.success(optimisticUpdate.hasSaved ? 'Project saved!' : 'Project unsaved')
+
         try {
-            const res = await axios.post(`/api/projects/${projectId}/save`)
-            setProjects(projects.map(p => 
-                p.id === projectId 
-                    ? { ...p, hasSaved: res.data.saved, saves: p.saves + (res.data.saved ? 1 : -1) }
-                    : p
-            ))
-            toast.success(res.data.saved ? 'Project saved!' : 'Project unsaved')
+            await axios.post(`/api/projects/${projectId}/save`)
         } catch (error) {
+            setProjects(projects.map(p => 
+                p.id === projectId ? project : p
+            ))
+            updateProject(projectId, { hasSaved: project.hasSaved, saves: project.saves })
             console.log(error)
         }
     }
@@ -158,7 +195,13 @@ const Page = () => {
 
         <div className="py-15">
             <h2 className="text-3xl font-medium tracking-tight text-center sm:text-left sm:mx-14 pb-3 text-[#FF8162]">My Projects</h2>
-            {projects.length > 0 ? (
+            {loading ? (
+                <div className="bg-gray-300 dark:bg-neutral-700 rounded-md px-3 py-3.5 grid gap-3 mx-4 sm:mx-12">
+                    {[...Array(3)].map((_, i) => (
+                        <ProjectCardSkeleton key={i} />
+                    ))}
+                </div>
+            ) :projects.length > 0 ? (
                 <div className="bg-gray-300 dark:bg-neutral-700 rounded-md px-3 py-3.5 grid gap-3 mx-4 sm:mx-12">
                     {projects.map((p: Project) => (
                         <div 
@@ -222,7 +265,9 @@ const Page = () => {
                         </div>
                     ))}
                 </div>
-            ) : null}
+            ) : (
+                <p className="text-center text-black dark:text-white opacity-85">No projects yet</p>
+            )}
         </div>
 
     </div>
