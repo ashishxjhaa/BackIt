@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     try {
         const userId = req.headers.get("x-user-id")!;
-        const projectId = params.id;
+        const { id: projectId } = await params;
 
         const project = await prisma.project.findUnique({
             where: { id: projectId },

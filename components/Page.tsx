@@ -200,23 +200,23 @@ const Page = () => {
                             <div className="flex gap-3 items-center">
                                 <div 
                                     onClick={() => handleUpvote(p.id)} 
-                                    className={`flex items-center justify-center w-12 h-12 rounded-xl border border-gray-400 dark:border-gray-50/30 hover:border-[#FF8162] dark:hover:border-[#FF8162] cursor-pointer ${p.hasUpvoted ? 'text-[#FF8162]' : ''}`}
+                                    className='flex items-center justify-center w-12 h-12 rounded-xl border border-gray-400 dark:border-gray-50/30 hover:border-[#FF8162] dark:hover:border-[#FF8162] cursor-pointer'
                                 >
-                                    <ArrowBigUp />
+                                    <ArrowBigUp className={p.hasUpvoted ? 'fill-[#FF8162] text-[#FF8162]' : ''} />
                                 </div>     
-                    
+
                                 <div 
                                     onClick={() => handleHeart(p.id)} 
-                                    className={`flex items-center justify-center w-12 h-12 rounded-xl border border-gray-400 dark:border-gray-50/30 hover:border-[#FF8162] dark:hover:border-[#FF8162] cursor-pointer ${p.hasUpvoted ? 'text-[#FF8162]' : ''}`}
+                                    className='flex items-center justify-center w-12 h-12 rounded-xl border border-gray-400 dark:border-gray-50/30 hover:border-[#FF8162] dark:hover:border-[#FF8162] cursor-pointer'
                                 >
-                                    <Heart />
+                                    <Heart className={p.hasHearted ? 'fill-[#FF8162] text-[#FF8162]' : ''} />
                                 </div>
 
                                 <div 
                                     onClick={() => handleSave(p.id)} 
-                                    className={`flex items-center justify-center w-12 h-12 rounded-xl border border-gray-400 dark:border-gray-50/30 hover:border-[#FF8162] dark:hover:border-[#FF8162] cursor-pointer ${p.hasUpvoted ? 'text-[#FF8162]' : ''}`}
+                                    className='flex items-center justify-center w-12 h-12 rounded-xl border border-gray-400 dark:border-gray-50/30 hover:border-[#FF8162] dark:hover:border-[#FF8162] cursor-pointer'
                                 >
-                                    <Bookmark />  
+                                    <Bookmark className={p.hasSaved ? 'fill-[#FF8162] text-[#FF8162]' : ''} />  
                                 </div>
                             </div>
                         </div>

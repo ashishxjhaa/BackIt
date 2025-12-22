@@ -70,8 +70,7 @@ const ListingsPage = () => {
     }
 
     return (
-        <div className="py-15">
-            <h2 className="text-3xl font-medium tracking-tight text-center sm:text-left sm:mx-14 pb-3 text-[#FF8162]">All Projects</h2>
+        <div className="py-15 mt-10">
             {projects.length > 0 ? (
                 <div className="bg-gray-300 dark:bg-neutral-700 rounded-md px-3 py-3.5 grid gap-3 mx-4 sm:mx-12">
                     {projects.map((p: Project) => (

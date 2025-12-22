@@ -57,7 +57,7 @@ const ListingNavbar = () => {
 
   return (
     <div className="fixed w-full z-50 p-4 bg-[#F6F6EF]/70 dark:bg-neutral-800/40 backdrop-blur-md border-b border-gray-600">
-      <div className="flex items-center justify-between max-w-5xl mx-auto">
+      <div className="flex items-center justify-between sm:mx-12 gap-2">
         <Image src='/BackIt.svg' alt="project-funding" width={45} height={45} className="w-8 h-8 object-contain" />
 
         <div className="relative">

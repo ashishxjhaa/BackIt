@@ -9,13 +9,25 @@ export async function GET(req: NextRequest) {
             where: { id: userId },
             include: {
                 savedProjects: {
-                    include: { user: { select: { fullName: true } } },
+                    include: { 
+                        user: { select: { fullName: true } },
+                        upvotedBy: { where: { id: userId } },
+                        heartedBy: { where: { id: userId } },
+                        savedBy: { where: { id: userId } },
+                    },
                     orderBy: { createdAt: 'desc' }
                 }
             }
         });
 
-        return NextResponse.json({ projects: user?.savedProjects || [] });
+        const projectsWithFlags = user?.savedProjects.map(p => ({
+            ...p,
+            hasUpvoted: p.upvotedBy.length > 0,
+            hasHearted: p.heartedBy.length > 0,
+            hasSaved: p.savedBy.length > 0,
+        })) || [];
+
+        return NextResponse.json({ projects: projectsWithFlags });
     } catch (error) {
         console.log(error);
         return NextResponse.json({ error: "Failed to fetch" }, { status: 500 });

@@ -51,13 +51,6 @@ export async function GET(req: NextRequest) {
             saves: projects.reduce((sum, p) => sum + p.saves, 0)
         };
 
-        const stats = {
-            projects: projects.length,
-            upvotes: projects.reduce((sum, p) => sum + p.upvotes, 0),
-            hearts: projects.reduce((sum, p) => sum + p.hearts, 0),
-            saves: projects.reduce((sum, p) => sum + p.saves, 0)
-        };
-
         return NextResponse.json({ projects: projectsWithFlags, stats });
     } catch (error) {
         console.log(error)

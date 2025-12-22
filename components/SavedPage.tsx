@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import Image from "next/image"
 import { toast } from "sonner"
+import Back from "./Back"
 
 interface Project {
     id: string
@@ -66,6 +67,9 @@ const SavedPage = () => {
     }
 
     return (
+        <>
+        <Back />
+     
         <div className="py-15">
             <h2 className="text-3xl font-medium tracking-tight text-center sm:text-left sm:mx-14 pb-3 text-[#FF8162]">Saved Projects</h2>
             {projects.length > 0 ? (
@@ -123,8 +127,9 @@ const SavedPage = () => {
                         </div>
                     ))}
                 </div>
-            ) : <p className="text-center">No saved projects</p>}
+            ) : <p className="text-center text-black dark:text-white">Loading saved projects</p>}
         </div>
+        </>
     )
 }
 
